@@ -25,13 +25,6 @@
     (.eval engine (FileReader. file)))
   ([engine] (load-marked engine (default-marked))))
 
-(defn- contains?
-  "Like the one in core, but returns false if not a set"
-  [coll x]
-  (if (instance? IPersistentSet coll)
-    false
-    (clojure.core/contains? coll x)))
-
 (defn- gfm-opts
   "Returns gfm-specific options"
   [gfm]
