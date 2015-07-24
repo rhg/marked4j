@@ -22,7 +22,7 @@
 (defn- load-marked
   "Evals the marked js"
   ([engine ^File file]
-    (.eval engine (FileReader. file)))
+   (.eval engine (FileReader. file)))
   ([engine] (load-marked engine (default-marked))))
 
 (defn- gfm-opts
@@ -31,6 +31,7 @@
   (into {:tables false :breaks false}
         (zipmap (or gfm #{})
                 (repeat true))))
+
 (defrecord MarkedOptions [gfm pedantic sanitize smartLists smartypants])
 
 (defn- coerce-bool
