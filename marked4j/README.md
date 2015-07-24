@@ -2,6 +2,8 @@
 
 A small wrapper around [https://github.com/chjj/marked](marked).
 
+[![Clojars Project](http://clojars.org/org.clojars.rhg135/marked4j/latest-version.svg)](http://clojars.org/org.clojars.rhg135/marked4j)
+
 ## Usage
 
 Pass a markdown string to `marked4j.core/marked`.
