@@ -15,7 +15,7 @@ Optionally the first arg may be a `javax.script.ScriptEngine`
 with the marked code loaded; which is conveniently available via the no args
 `marked4j.core/new-engine`.
 
-The last arg is optional and may be a map or an object with public fields.
+The last arg is optional and may be a map or an instance of `marked4j.core.MarkedOptions`
 If a map, turns it into an object and validates it.
 Otherwise assumes it's good to pass into marked.
 
