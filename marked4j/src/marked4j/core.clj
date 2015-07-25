@@ -1,9 +1,7 @@
 (ns marked4j.core
-  (:refer-clojure :exclude (contains?))
   (:require [clojure.java.io :as io])
   (:import [java.net URL]
-           [javax.script ScriptEngineManager ScriptEngine Invocable]
-           (clojure.lang IPersistentSet)))
+           [javax.script ScriptEngineManager ScriptEngine Invocable]))
 
 (defn- ^ScriptEngine engine
   "Returns an engine for a given name. js by default"
