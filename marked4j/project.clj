@@ -1,4 +1,4 @@
-(defproject org.clojars.rhg135/marked4j "0.0.2"
+(defproject org.clojars.rhg135/marked4j "0.0.3-SNAPSHOT"
   :description "Small library for turning markdown to html using marked"
   :url "https://github.com/rhg/marked4j"
   :license {:name "CC0"
