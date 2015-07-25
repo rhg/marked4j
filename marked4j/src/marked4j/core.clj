@@ -1,7 +1,7 @@
 (ns marked4j.core
   (:refer-clojure :exclude (contains?))
   (:require [clojure.java.io :as io])
-  (:import [java.io FileReader File]
+  (:import [java.net URL]
            [javax.script ScriptEngineManager ScriptEngine Invocable]
            (clojure.lang IPersistentSet)))
 
@@ -13,7 +13,7 @@
 (defn- default-marked
   "Return the bundled marked.min.js 0.3.2"
   []
-  (-> (io/resource "marked.min.js") io/file))
+  (-> (io/resource "marked.min.js")))
 
 (def default-options
   (zipmap #{:gfm :tables :breaks :sanitize :pedantic :smartypants :smartLists}
@@ -21,8 +21,8 @@
 
 (defn- load-marked
   "Evals the marked js"
-  ([engine ^File file]
-   (.eval engine (FileReader. file)))
+  ([engine ^URL url]
+   (.eval engine (slurp url)))
   ([engine] (load-marked engine (default-marked))))
 
 (defn- gfm-opts
