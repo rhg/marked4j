@@ -6,5 +6,5 @@
   :scm {:name "git"
         :url "https://github.com/rhg/marked4j"
         :dir ".."}
-  :dependencies [[org.clojure/clojure "1.6.0"]
+  :dependencies [[org.clojure/clojure "1.7.0" :scope "provided"]
                  [org.clojars.rhg135.marked4j/marked "0.3.2"]])
