@@ -53,9 +53,6 @@
    (.eval engine (slurp url)))
   ([engine] (load-marked! engine (default-marked))))
 
-(def ^:private marked-engine ; we pretend it will never fail, and if it does, you have bigger problems
-  (delay (agent (doto (engine) (load-marked!)))))
-
 (defn- invoke-function*
   [engine fn-name & args]
   (.invokeFunction engine (name fn-name) (object-array args)))
@@ -91,9 +88,19 @@
     (comp throw-error deref async-marked)
     (comp throw-error (fn [x & more] (apply sync-marked @x more)))))
 
-(defn marked ; TODO: expose an async API
-  "Turns markdown code into html"
-  ([markdown-string] (marked markdown-string *options*))
-  ([markdown-string {:keys [concurrent?] :as options}]
-   ((marked-function concurrent?)
-    @marked-engine markdown-string options)))
+(defn new-handle
+  "Returns a handle we can pass to `marked'"
+  []
+  (agent (doto (engine) (load-marked!))))
+
+(let [marked-engine ; we pretend it will never fail, and if it does, you have bigger problems
+                    ; still would be nice to be able to reset this TODO: add a way
+                    ; this is the default handle if none is passed to marked
+      (delay (new-handle))]
+  (defn marked ; TODO: expose an async API
+    "Turns markdown code into html"
+    ([markdown-string] (marked markdown-string *options*))
+    ([markdown-string options] (marked @marked-engine markdown-string options))
+    ([handle markdown-string {:keys [concurrent?] :as options}]
+     ((marked-function concurrent?)
+      handle markdown-string options))))
