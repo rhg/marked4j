@@ -1,7 +1,7 @@
 (ns com.rhg135.marked4j.main
   (:gen-class))
 
-(defn do-main
+(defn do-main ; FIXME: this doesn't return
   []
   (let [in (slurp *in*)
         _ (require 'com.rhg135.marked4j)
